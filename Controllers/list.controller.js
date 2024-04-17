@@ -20,12 +20,16 @@ const updateList = async (req, res) => {
       list.categories.push(category_id);
     }
 
-  await list.save()
+    await list.save();
 
-    return res.status(200).json({ message: "List updated successfully", data: list });
+    return res
+      .status(200)
+      .json({ message: "List updated successfully", data: list });
   } catch (error) {
     console.error("Error updating list:", error);
-    return res.status(500).json({ message: "Failed to update list", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Failed to update list", error: error.message });
   }
 };
 
