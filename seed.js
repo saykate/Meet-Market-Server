@@ -58,7 +58,7 @@ const generateCategories = (departments) => {
         break;
       case "Produce":
         categories.push({ title: "Fruits", department: department._id });
-        categories.push({ title: "Vegitables", department: department._id });
+        categories.push({ title: "Vegetables", department: department._id });
         categories.push({ title: "Prepared", department: department._id });
         break;
     }
@@ -77,6 +77,7 @@ const insertData = async () => {
     const insertedDepartments = await Department.insertMany(departmentData);
     const categoriesData = generateCategories(insertedDepartments);
     const insertedCategories = await Category.insertMany(categoriesData);
+    //need to then regenerate the departments or something so that the categories will appear in the array...
   } catch (err) {
     console.error(err);
   }
