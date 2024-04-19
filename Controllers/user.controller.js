@@ -1,3 +1,4 @@
+const List = require("../models/List");
 const User = require("../models/User");
 
 exports.listUsers = async (req, res) => {
@@ -51,5 +52,28 @@ exports.updateUser = async (req, res) => {
       .json({ message: "Failed to update user", error: error.message });
   }
 };
+
+exports.getUserLists = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    if (!_id) {
+      return res.status(400).json({ message: "User Id required" })
+    }
+
+    const user = await User.findById(_id)
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const userLists = await List.find({ creator: user._id });
+
+    return res.status(200).json({ message: "Success fetching Lists", data: userLists })
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to update user", error: error.message });
+  }
+};
+
 // exports.getUserMessages = async (req, res) => {};
-// exports.getUserLists = async (req, res) => {};

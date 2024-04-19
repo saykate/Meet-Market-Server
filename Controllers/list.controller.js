@@ -14,8 +14,6 @@ const updateList = async (req, res) => {
       return res.status(404).json({ message: "List not found" });
     }
 
-    // const categoryIdString = category_id.toString();
-
     if (list.categories.includes(category_id)) {
       list.categories.pull(category_id);
     } else {
