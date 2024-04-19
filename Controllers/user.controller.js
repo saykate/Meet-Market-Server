@@ -1,5 +1,6 @@
 const List = require("../models/List");
 const User = require("../models/User");
+const Message = require("../models/Message");
 
 exports.listUsers = async (req, res) => {
   try {
@@ -33,18 +34,16 @@ exports.updateUser = async (req, res) => {
     const { _id } = req.params;
     const { body } = req;
     if (!_id || !body) {
-      return res.status(400).json({ message: "Missing required fields" })
+      return res.status(400).json({ message: "Missing required fields" });
     }
-    const updatedUser = await User.findByIdAndUpdate(
-      _id, 
-      body, 
-      { new: true }
-    );
+    const updatedUser = await User.findByIdAndUpdate(_id, body, { new: true });
 
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
-    return res.status(200).json({ message: "Success updating user", data: updatedUser})
+    return res
+      .status(200)
+      .json({ message: "Success updating user", data: updatedUser });
   } catch (error) {
     console.error("Error updating user:", error);
     return res
@@ -57,23 +56,48 @@ exports.getUserLists = async (req, res) => {
   try {
     const { _id } = req.params;
     if (!_id) {
-      return res.status(400).json({ message: "User Id required" })
+      return res.status(400).json({ message: "User Id required" });
     }
 
-    const user = await User.findById(_id)
+    const user = await User.findById(_id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
     const userLists = await List.find({ creator: user._id });
 
-    return res.status(200).json({ message: "Success fetching Lists", data: userLists })
+    return res
+      .status(200)
+      .json({ message: "Success fetching Lists", data: userLists });
   } catch (error) {
     console.error("Error updating user:", error);
     return res
       .status(500)
-      .json({ message: "Failed to update user", error: error.message });
+      .json({ message: "Failed to fetch Lists", error: error.message });
   }
 };
 
-// exports.getUserMessages = async (req, res) => {};
+exports.getUserMessages = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    if (!_id) {
+      return res.status(400).json({ message: "User Id required" });
+    }
+
+    const user = await User.findById(_id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const userMessages = await Message.find({ recipient: user._id });
+
+    return res
+      .status(200)
+      .json({ message: "Success fetching Messages", data: userMessages });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to fetch Messages", error: error.message });
+  }
+};

@@ -6,6 +6,6 @@ router.get("/", users.listUsers);
 router.get("/:_id", users.getUser);
 router.put("/:_id", users.updateUser);
 router.get("/:_id/lists", users.getUserLists);
-// router.get("/:_id/messages", users.getUserMessages);
+router.get("/:_id/messages", users.getUserMessages);
 
 module.exports = router;
