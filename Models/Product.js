@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
-  product: {
+  title: {
     type: String,
     required: true,
   },
-  productId: { 
-    type: Number, 
-    required: true,
+  category: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Category'
   }
 });
 
