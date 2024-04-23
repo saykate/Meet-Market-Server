@@ -65,6 +65,7 @@ passport.use(
   })
 );
 
+app.get("/", (req, res) => {res.json("Hello from the Server")})
 app.use("/auth", authRouter);
 app.use("/users", checkIsAuthenticated, userRouter);
 app.use("/messages", checkIsAuthenticated, messageRouter)
