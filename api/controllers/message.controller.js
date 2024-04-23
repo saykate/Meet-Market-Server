@@ -54,9 +54,9 @@ exports.getMessage = async (req, res) => {
     }
     const message = await Message.findById(_id);
     if (!message) {
-      return res.status(404).json({ message: "Message not found"})
+      return res.status(404).json({ message: "Message not found" });
     }
-    console.log("message", message)
+    console.log("message", message);
     return res
       .status(200)
       .json({ message: "Message retrieved", data: message });
@@ -76,10 +76,9 @@ exports.deleteMessage = async (req, res) => {
     }
     const message = await Message.findByIdAndDelete(_id);
     if (!message) {
-      return res.status(404).json({ message: "Message not found"})
+      return res.status(404).json({ message: "Message not found" });
     }
-    return res.status(200).json({ message: "Message deleted" })
-
+    return res.status(200).json({ message: "Message deleted" });
   } catch (error) {
     console.error(error);
     return res

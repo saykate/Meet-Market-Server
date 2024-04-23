@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoDB = process.env.MONGO_CREDS;
 const SECRET = process.env.JWT_SECRET;
-const clientURL = process.env.CLIENT_URL
+const clientURL = process.env.CLIENT_URL;
 const app = express();
 const User = require("./models/User");
 const passport = require("passport");
@@ -65,12 +65,14 @@ passport.use(
   })
 );
 
-app.get("/", (req, res) => {res.json("Hello from the Server")})
+app.get("/", (req, res) => {
+  res.json("Hello from the Server");
+});
 app.use("/auth", authRouter);
 app.use("/users", checkIsAuthenticated, userRouter);
-app.use("/messages", checkIsAuthenticated, messageRouter)
+app.use("/messages", checkIsAuthenticated, messageRouter);
 app.use("/lists", checkIsAuthenticated, listRouter);
-app.use("/departments", departmentRouter)
+app.use("/departments", departmentRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
