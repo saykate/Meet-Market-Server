@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const app = require('../api/index.js');
+const app = require('../app');
 const debug = require('debug')('meet-market-server:server');
 const http = require('http');
 
