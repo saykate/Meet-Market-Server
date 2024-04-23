@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoDB = process.env.MONGO_CREDS;
 const SECRET = process.env.JWT_SECRET;
+const clientURL = process.env.CLIENT_URL
 const app = express();
 const User = require("./models/User");
 const passport = require("passport");
@@ -17,7 +18,7 @@ const userRouter = require("./routes/users.routes");
 const messageRouter = require("./routes/messages.routes");
 const listRouter = require("./routes/lists.routes");
 const departmentRouter = require("./routes/departments.routes");
-const whitelist = ["http://localhost:5173", "https://meet-market.netlify.app"];
+const whitelist = [clientURL, "http://localhost:5173"];
 const corsOptions = { origin: whitelist, credentials: true };
 
 mongoose.set("strictQuery", false);
