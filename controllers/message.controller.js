@@ -30,10 +30,6 @@ exports.createMessage = async (req, res) => {
     await newMessage.save();
     console.log(newMessage);
 
-    // When I implement the messaging feature on the frontend, ensure the following:
-    // User Identification: On the user profile page, have the user's ID available (e.g., from the profile data fetched). This ID should be sent as the recipientId when creating a message.
-    // Message Composition: Provide a UI component (like a form) for writing and sending messages. This form should submit both the text of the message and the recipientId.
-    // API Integration: Make sure your frontend correctly calls your backend API with the necessary data (authorId, recipientId, and text).
 
     return res
       .status(200)
