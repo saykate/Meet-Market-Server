@@ -8,22 +8,22 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  firstName: {
-    type: String, 
-    required: true, 
-  },
-  lastName: {
-    type: String, 
-    required: true, 
-  },
-  bio: { 
-    type: String, 
-    required: true 
-  },
-  birthdate: { 
-    type: Date, 
-    required: true 
-  },
+  // firstName: {
+  //   type: String, 
+  //   required: true, 
+  // },
+  // lastName: {
+  //   type: String, 
+  //   required: true, 
+  // },
+  // bio: { 
+  //   type: String, 
+  //   required: true 
+  // },
+  // birthdate: { 
+  //   type: Date, 
+  //   required: true 
+  // },
   profilePhoto: String,
   coverPhoto: String,
   followers: [{ 
