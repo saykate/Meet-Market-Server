@@ -6,6 +6,10 @@ const CategorySchema = new Schema({
     type: String,
     required: true,
   },
+  photo: {
+    type: String,
+    required: false,
+  },
   // products: [{ 
   //   type: mongoose.Schema.Types.ObjectId, 
   //   ref: 'Product'

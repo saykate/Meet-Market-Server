@@ -6,6 +6,10 @@ const DepartmentSchema = new Schema({
     type: String,
     required: true,
   },
+  photo: {
+    type: String,
+    required: false,
+  },
   categories: [{ 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Category'
