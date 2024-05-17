@@ -56,7 +56,6 @@ const insertData = async () => {
     const insertedDairyCategories = await Category.insertMany(dairyCats);
     const departmentData = generateDepartments({ insertedMeatCategories, insertedSeafoodCategories, insertedProduceCategories, insertedDairyCategories });
     const insertedDepartments = await Department.insertMany(departmentData);
-    console.log(insertedDepartments)
   } catch (err) {
     console.error(err);
   }

@@ -28,8 +28,6 @@ exports.createMessage = async (req, res) => {
       recipient: recipientId,
     });
     await newMessage.save();
-    console.log(newMessage);
-
 
     return res
       .status(200)
@@ -52,7 +50,6 @@ exports.getMessage = async (req, res) => {
     if (!message) {
       return res.status(404).json({ message: "Message not found" });
     }
-    console.log("message", message);
     return res
       .status(200)
       .json({ message: "Message retrieved", data: message });
