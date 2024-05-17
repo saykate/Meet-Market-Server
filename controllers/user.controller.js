@@ -64,7 +64,7 @@ exports.getUserLists = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const userLists = await List.find({ creator: user._id });
+    const userLists = await List.find({ creator: user._id }).populate('departments');
 
     return res
       .status(200)
@@ -89,7 +89,7 @@ exports.getUserMessages = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const userMessages = await Message.find({ recipient: user._id });
+    const userMessages = await Message.find({ recipient: user._id }).populate('author');
 
     return res
       .status(200)
