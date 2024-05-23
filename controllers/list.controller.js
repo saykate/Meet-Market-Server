@@ -5,7 +5,7 @@ const updateList = async (req, res) => {
     const { _id } = req.params;
     const { category_id } = req.body;
 
-    if (!category_id_id) {
+    if (!category_id) {
       return res.status(400).json({ message: "Category ID must be provided" });
     }
 

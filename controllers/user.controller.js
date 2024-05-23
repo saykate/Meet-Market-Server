@@ -63,7 +63,7 @@ exports.getUserLists = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const userLists = await List.find({ creator: user._id }).populate('departments');
+    const userLists = await List.find({ creator: user._id }).populate('categories');
 
     return res
       .status(200)
