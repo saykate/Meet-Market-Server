@@ -21,7 +21,7 @@ const departmentRouter = require("../routes/departments.routes");
 const whitelist = [clientURL, "http://localhost:5173"];
 const corsOptions = { origin: whitelist, credentials: true };
 require("../models/Category");
-require("../models/Department")
+require("../models/Department");
 
 mongoose.set("strictQuery", false);
 main().catch((err) => console.error(err));

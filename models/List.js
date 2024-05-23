@@ -5,16 +5,18 @@ const ListSchema = new Schema({
   listName: {
     type: String,
     required: true,
-    default: "My List"
+    default: "My List",
   },
-  creator: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User'
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
-  categories: [{ 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Category'
-  }],
+  categories: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
+  ],
 });
 
 module.exports = mongoose.model("List", ListSchema);

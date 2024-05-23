@@ -112,7 +112,8 @@ const produceCats = [
   },
   {
     title: "Prepared",
-    photo: "https://photos-for-meet-market.s3.amazonaws.com/preparedVeggies.jpeg",
+    photo:
+      "https://photos-for-meet-market.s3.amazonaws.com/preparedVeggies.jpeg",
   },
 ];
 const dairyCats = [

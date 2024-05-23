@@ -32,7 +32,8 @@ const handleLogin = async (req, res, next) => {
 
 const handleRegister = async (req, res, next) => {
   try {
-    const { username, password, firstName, lastName, bio, birthdate } = req.body;
+    const { username, password, firstName, lastName, bio, birthdate } =
+      req.body;
     User.register(
       new User({ username, firstName, lastName, bio, birthdate }),
       password,

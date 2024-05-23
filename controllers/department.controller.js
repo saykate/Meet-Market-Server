@@ -15,7 +15,7 @@ exports.listDepartments = async (req, res) => {
 exports.getDepartment = async (req, res) => {
   try {
     const { _id } = req.params;
-    const department = await Department.findById(_id).populate('categories');
+    const department = await Department.findById(_id).populate("categories");
     if (!department) {
       return res.status(404).json({ message: "Department not found" });
     }
@@ -27,5 +27,3 @@ exports.getDepartment = async (req, res) => {
       .json({ message: "Failed to fetch department", error: error.message });
   }
 };
-
-

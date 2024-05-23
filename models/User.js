@@ -9,31 +9,35 @@ const UserSchema = new Schema({
     required: true,
   },
   firstName: {
-    type: String, 
-    // required: true, 
+    type: String,
+    // required: true,
   },
   lastName: {
-    type: String, 
-    // required: true, 
+    type: String,
+    // required: true,
   },
-  bio: { 
-    type: String, 
-    // required: true 
+  bio: {
+    type: String,
+    // required: true
   },
-  birthdate: { 
-    type: Date, 
-    // required: true 
+  birthdate: {
+    type: Date,
+    // required: true
   },
   profilePhoto: String,
   coverPhoto: String,
-  followers: [{ 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User'
-  }],
-  following: [{ 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User'
-  }],
+  followers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  following: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 UserSchema.plugin(passportLocalMongoose);

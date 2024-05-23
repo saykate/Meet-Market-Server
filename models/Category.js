@@ -10,8 +10,8 @@ const CategorySchema = new Schema({
     type: String,
     required: false,
   },
-  // products: [{ 
-  //   type: mongoose.Schema.Types.ObjectId, 
+  // products: [{
+  //   type: mongoose.Schema.Types.ObjectId,
   //   ref: 'Product'
   // }],
 });
