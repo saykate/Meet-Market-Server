@@ -94,39 +94,39 @@ const meatCats = [
 const seafoodCats = [
   {
     title: "Fish",
-    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/fish.jpeg",
   },
   {
     title: "Shellfish",
-    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/shellfish.jpeg",
   },
 ];
 const produceCats = [
   {
     title: "Fruits",
-    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/fruit.jpeg",
   },
   {
     title: "Vegetables",
-    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/vegetables.jpg",
   },
   {
     title: "Prepared",
-    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/preparedVeggies.jpeg",
   },
 ];
 const dairyCats = [
   {
     title: "Milk",
-    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/milk.jpeg",
   },
   {
     title: "Cheese",
-    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/cheese.jpeg",
   },
   {
     title: "Eggs",
-    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/eggs.jpeg",
   },
 ];
 

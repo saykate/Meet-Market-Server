@@ -88,7 +88,7 @@ exports.getUserMessages = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const userMessages = await Message.find({ recipient: user._id }).populate('author');
+    const userMessages = await Message.find({ $or: [{ author: user._id }, { recipient: user._id }] }).populate('author recipient');
 
     return res
       .status(200)
