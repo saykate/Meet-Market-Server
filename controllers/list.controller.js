@@ -14,10 +14,10 @@ const updateList = async (req, res) => {
       return res.status(404).json({ message: "List not found" });
     }
 
-    if (list.categories.includes(category_id_id)) {
-      list.categories.pull(category_id_id);
+    if (list.categories.includes(category_id)) {
+      list.categories.pull(category_id);
     } else {
-      list.categories.push(category_id_id);
+      list.categories.push(category_id);
     }
 
     await list.save();
