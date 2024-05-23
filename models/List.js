@@ -11,9 +11,9 @@ const ListSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'User'
   },
-  departments: [{ 
+  categories: [{ 
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Department'
+    ref: 'Category'
   }],
 });
 
