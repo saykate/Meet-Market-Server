@@ -13,21 +13,60 @@ const connect = async () => {
   }
 };
 
-const generateDepartments = ({ insertedMeatCategories, insertedSeafoodCategories, insertedProduceCategories, insertedDairyCategories }) => {
+const generateDepartments = ({
+  insertedMeatCategories,
+  insertedSeafoodCategories,
+  insertedProduceCategories,
+  insertedDairyCategories,
+}) => {
   return [
-    { title: "Meat", photo: "https://photos-for-meet-market.s3.amazonaws.com/meat-section.jpg", categories: insertedMeatCategories.map(cat => cat._id) },
-    { title: "Seafood", photo: "https://photos-for-meet-market.s3.amazonaws.com/seafood-section.jpg", categories: insertedSeafoodCategories.map(cat => cat._id) },
-    { title: "Produce", photo: "https://photos-for-meet-market.s3.amazonaws.com/produce-section.jpeg", categories: insertedProduceCategories.map(cat => cat._id) },
-    { title: "Dairy", photo: "https://photos-for-meet-market.s3.amazonaws.com/dairy-section.jpeg", categories: insertedDairyCategories.map(cat => cat._id) },
-    { title: "Baked Goods", photo: "https://photos-for-meet-market.s3.amazonaws.com/bakery.jpeg" },
+    {
+      title: "Meat",
+      photo: "https://photos-for-meet-market.s3.amazonaws.com/meat-section.jpg",
+      categories: insertedMeatCategories.map((cat) => cat._id),
+    },
+    {
+      title: "Seafood",
+      photo:
+        "https://photos-for-meet-market.s3.amazonaws.com/seafood-section.jpg",
+      categories: insertedSeafoodCategories.map((cat) => cat._id),
+    },
+    {
+      title: "Produce",
+      photo:
+        "https://photos-for-meet-market.s3.amazonaws.com/produce-section.jpeg",
+      categories: insertedProduceCategories.map((cat) => cat._id),
+    },
+    {
+      title: "Dairy",
+      photo:
+        "https://photos-for-meet-market.s3.amazonaws.com/dairy-section.jpeg",
+      categories: insertedDairyCategories.map((cat) => cat._id),
+    },
+    {
+      title: "Baked Goods",
+      photo: "https://photos-for-meet-market.s3.amazonaws.com/bakery.jpeg",
+    },
     // { title: "Beverages" },
-    { title: "Office Supplies", photo: "https://photos-for-meet-market.s3.amazonaws.com/office-supplies.jpeg" },
+    {
+      title: "Office Supplies",
+      photo:
+        "https://photos-for-meet-market.s3.amazonaws.com/office-supplies.jpeg",
+    },
     // { title: "Prepared Meals" },
     // { title: "Paper Products" },
-    { title: "Cleaning Supplies", photo: "https://photos-for-meet-market.s3.amazonaws.com/cleaning-supplies.jpg" },
+    {
+      title: "Cleaning Supplies",
+      photo:
+        "https://photos-for-meet-market.s3.amazonaws.com/cleaning-supplies.jpg",
+    },
     // { title: "Frozen" },
     // { title: "Baking, Spices and Condiments", photo: "https://photos-for-meet-market.s3.amazonaws.com/baking-spices.jpeg" },
-    { title: "Canned Goods", photo: "https://photos-for-meet-market.s3.amazonaws.com/canned-foods.jpeg" },
+    {
+      title: "Canned Goods",
+      photo:
+        "https://photos-for-meet-market.s3.amazonaws.com/canned-foods.jpeg",
+    },
     // { title: "Sauces" },
     // { title: "Grains" },
     // { title: "Bread" },
@@ -38,10 +77,58 @@ const generateDepartments = ({ insertedMeatCategories, insertedSeafoodCategories
   ];
 };
 
-const meatCats = [{ title: "Chicken", photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg"}, { title: "Beef" }, { title: "Pork" }]
-const seafoodCats = [{ title: "Fish" }, { title: "Shellfish" }]
-const produceCats = [{ title: "Fruits" }, { title: "Vegetables" }, { title: "Prepared" }]
-const dairyCats = [{ title: "Milk" }, { title: "Cheese" }, { title: "Eggs" }]
+const meatCats = [
+  {
+    title: "Chicken",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+  },
+  {
+    title: "Beef",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/beef.jpeg",
+  },
+  {
+    title: "Pork",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/pork.jpg",
+  },
+];
+const seafoodCats = [
+  {
+    title: "Fish",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+  },
+  {
+    title: "Shellfish",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+  },
+];
+const produceCats = [
+  {
+    title: "Fruits",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+  },
+  {
+    title: "Vegetables",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+  },
+  {
+    title: "Prepared",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+  },
+];
+const dairyCats = [
+  {
+    title: "Milk",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+  },
+  {
+    title: "Cheese",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+  },
+  {
+    title: "Eggs",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/Chicken.jpeg",
+  },
+];
 
 const dropCollections = async () => {
   await Department.collection.drop();
@@ -54,7 +141,12 @@ const insertData = async () => {
     const insertedSeafoodCategories = await Category.insertMany(seafoodCats);
     const insertedProduceCategories = await Category.insertMany(produceCats);
     const insertedDairyCategories = await Category.insertMany(dairyCats);
-    const departmentData = generateDepartments({ insertedMeatCategories, insertedSeafoodCategories, insertedProduceCategories, insertedDairyCategories });
+    const departmentData = generateDepartments({
+      insertedMeatCategories,
+      insertedSeafoodCategories,
+      insertedProduceCategories,
+      insertedDairyCategories,
+    });
     const insertedDepartments = await Department.insertMany(departmentData);
   } catch (err) {
     console.error(err);
@@ -68,6 +160,4 @@ const seed = async () => {
   process.exit();
 };
 
-seed()
-
-
+seed();
