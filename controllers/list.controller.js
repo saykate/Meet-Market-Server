@@ -3,10 +3,10 @@ const List = require("../models/List");
 const updateList = async (req, res) => {
   try {
     const { _id } = req.params;
-    const { department_id } = req.body;
+    const { category_id } = req.body;
 
-    if (!department_id) {
-      return res.status(400).json({ message: "Department ID must be provided" });
+    if (!category_id_id) {
+      return res.status(400).json({ message: "Category ID must be provided" });
     }
 
     const list = await List.findById(_id);
@@ -14,10 +14,10 @@ const updateList = async (req, res) => {
       return res.status(404).json({ message: "List not found" });
     }
 
-    if (list.departments.includes(department_id)) {
-      list.departments.pull(department_id);
+    if (list.categories.includes(category_id_id)) {
+      list.categories.pull(category_id_id);
     } else {
-      list.departments.push(department_id);
+      list.categories.push(category_id_id);
     }
 
     await list.save();
