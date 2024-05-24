@@ -18,6 +18,10 @@ const generateDepartments = ({
   insertedSeafoodCategories,
   insertedProduceCategories,
   insertedDairyCategories,
+  insertedBakedCategories,
+  insertedOfficeCategories,
+  insertedCleaningCategories,
+  insertedDryGoodsCategories,
 }) => {
   return [
     {
@@ -46,12 +50,14 @@ const generateDepartments = ({
     {
       title: "Baked Goods",
       photo: "https://photos-for-meet-market.s3.amazonaws.com/bakery.jpeg",
+      categories: insertedBakedCategories.map((cat) => cat._id),
     },
     // { title: "Beverages" },
     {
       title: "Office Supplies",
       photo:
         "https://photos-for-meet-market.s3.amazonaws.com/office-supplies.jpeg",
+      categories: insertedOfficeCategories.map((cat) => cat._id),
     },
     // { title: "Prepared Meals" },
     // { title: "Paper Products" },
@@ -59,16 +65,14 @@ const generateDepartments = ({
       title: "Cleaning Supplies",
       photo:
         "https://photos-for-meet-market.s3.amazonaws.com/cleaning-supplies.jpg",
+      categories: insertedCleaningCategories.map((cat) => cat._id),
     },
     // { title: "Frozen" },
-    // { title: "Baking, Spices and Condiments", photo: "https://photos-for-meet-market.s3.amazonaws.com/baking-spices.jpeg" },
     {
-      title: "Canned Goods",
-      photo:
-        "https://photos-for-meet-market.s3.amazonaws.com/canned-foods.jpeg",
+      title: "Dry Goods",
+      photo: "https://photos-for-meet-market.s3.amazonaws.com/dry-goods.jpeg",
+      categories: insertedDryGoodsCategories.map((cat) => cat._id),
     },
-    // { title: "Sauces" },
-    // { title: "Grains" },
     // { title: "Bread" },
     // { title: "Snacks" },
     // { title: "Vitamins" },
@@ -130,6 +134,96 @@ const dairyCats = [
     photo: "https://photos-for-meet-market.s3.amazonaws.com/eggs.jpeg",
   },
 ];
+const bakedCats = [
+  {
+    title: "Muffins & Bagels",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/bagels.jpg",
+  },
+  {
+    title: "Cookies",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/cookies.jpeg",
+  },
+  {
+    title: "Cakes",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/cakes.jpeg",
+  },
+];
+const officeCats = [
+  {
+    title: "Paper",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/paper.jpeg",
+  },
+  {
+    title: "Filing & Storage",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/filing.jpg",
+  },
+  {
+    title: "Breakroom",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/breakroom.jpg",
+  },
+];
+const cleaningCats = [
+  {
+    title: "Laundry",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/laundry.jpeg",
+  },
+  {
+    title: "Cleaners",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/cleaners.jpeg",
+  },
+  {
+    title: "Tools",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/tools.jpeg",
+  },
+  {
+    title: "Dish Soap & Detergent",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/dish.jpg",
+  },
+  {
+    title: "Trash Bags",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/trashbags.jpeg",
+  },
+];
+const dryGoodsCats = [
+  {
+    title: "Baking Supplies",
+    photo:
+      "https://photos-for-meet-market.s3.amazonaws.com/baking-supplies.jpeg",
+  },
+  {
+    title: "Sweeteners",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/sweeteners.jpeg",
+  },
+  {
+    title: "Spices",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/spices.jpeg",
+  },
+  {
+    title: "Soup & Broth",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/broth.jpeg",
+  },
+  {
+    title: "Sauces & Condiments",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/condiments.jpeg",
+  },
+  {
+    title: "Canned Goods",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/canned-foods.jpeg",
+  },
+  {
+    title: "Pasta & Grains",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/grains.jpeg",
+  },
+  {
+    title: "Vinegar & Oil",
+    photo:
+      "https://photos-for-meet-market.s3.amazonaws.com/oil+%26+vinegar.jpeg",
+  },
+  {
+    title: "Nut Butters & Jams",
+    photo: "https://photos-for-meet-market.s3.amazonaws.com/nut+butters.jpeg",
+  },
+];
 
 const dropCollections = async () => {
   await Department.collection.drop();
@@ -142,11 +236,19 @@ const insertData = async () => {
     const insertedSeafoodCategories = await Category.insertMany(seafoodCats);
     const insertedProduceCategories = await Category.insertMany(produceCats);
     const insertedDairyCategories = await Category.insertMany(dairyCats);
+    const insertedBakedCategories = await Category.insertMany(bakedCats);
+    const insertedOfficeCategories = await Category.insertMany(officeCats);
+    const insertedCleaningCategories = await Category.insertMany(cleaningCats);
+    const insertedDryGoodsCategories = await Category.insertMany(dryGoodsCats);
     const departmentData = generateDepartments({
       insertedMeatCategories,
       insertedSeafoodCategories,
       insertedProduceCategories,
       insertedDairyCategories,
+      insertedBakedCategories,
+      insertedOfficeCategories,
+      insertedCleaningCategories,
+      insertedDryGoodsCategories,
     });
     const insertedDepartments = await Department.insertMany(departmentData);
   } catch (err) {
