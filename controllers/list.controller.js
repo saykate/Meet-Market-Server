@@ -1,4 +1,5 @@
 const List = require("../models/List");
+const User = require("../models/User")
 
 const updateList = async (req, res) => {
   try {
@@ -33,4 +34,22 @@ const updateList = async (req, res) => {
   }
 };
 
-module.exports = { updateList };
+const findUsersByCategory = async(req, res) =>{
+    const { categoryId } = req.params;
+    if (!categoryId) {
+      return res.status(400).json({ message: 'Category ID must be provided' });
+    }
+    try {
+    const lists = await List.find({ categories: categoryId }).populate('creator').exec();
+    const users = lists.map(list => list.creator);
+    const uniqueUsers = [...new Set(users.map(user => user._id.toString()))].map(id => users.find(user => user._id.toString() === id))
+    return res.status(200).json({ data: uniqueUsers });
+  } catch (error) {
+    console.error("Error finding users:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to find users", error: error.message });
+  }
+}
+
+module.exports = { updateList, findUsersByCategory };
