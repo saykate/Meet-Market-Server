@@ -19,4 +19,6 @@ const ListSchema = new Schema({
   ],
 });
 
+ListSchema.index({ categories: 1 });
+
 module.exports = mongoose.model("List", ListSchema);
