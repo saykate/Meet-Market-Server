@@ -1,7 +1,7 @@
 const List = require("../models/List");
 const User = require("../models/User")
 
-const addListItemList = async (req, res) => {
+const addListItem = async (req, res) => {
   try {
     const { _id } = req.params;
     const { category_id } = req.body;
@@ -16,7 +16,6 @@ const addListItemList = async (req, res) => {
     }
 
     list.categories.push(category_id);
-
     await list.save();
 
     return res
@@ -29,7 +28,7 @@ const addListItemList = async (req, res) => {
       .json({ message: "Failed to update list", error: error.message });
   }
 };
-const deleteListItemList = async (req, res) => {
+const deleteListItem = async (req, res) => {
   try {
     const { _id } = req.params;
     const { category_id } = req.body;
@@ -44,7 +43,6 @@ const deleteListItemList = async (req, res) => {
     }
 
     list.categories.pull(category_id);
-
     await list.save();
 
     return res
