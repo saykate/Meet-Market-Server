@@ -106,4 +106,4 @@ const findUsersByCategory = async(req, res) =>{
   }
 }
 
-module.exports = { addListItemList, deleteListItemList, findUsersByCategory };
+module.exports = { addListItem, deleteListItem, findUsersByCategory };
