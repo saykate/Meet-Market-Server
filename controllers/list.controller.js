@@ -1,5 +1,4 @@
 const List = require("../models/List");
-const User = require("../models/User")
 
 const addListItem = async (req, res) => {
   try {
