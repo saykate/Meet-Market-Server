@@ -1,7 +1,7 @@
 const List = require("../models/List");
 const User = require("../models/User")
 
-const updateList = async (req, res) => {
+const addListItemList = async (req, res) => {
   try {
     const { _id } = req.params;
     const { category_id } = req.body;
@@ -15,11 +15,7 @@ const updateList = async (req, res) => {
       return res.status(404).json({ message: "List not found" });
     }
 
-    if (list.categories.includes(category_id)) {
-      list.categories.pull(category_id);
-    } else {
-      list.categories.push(category_id);
-    }
+    list.categories.push(category_id);
 
     await list.save();
 
@@ -33,6 +29,66 @@ const updateList = async (req, res) => {
       .json({ message: "Failed to update list", error: error.message });
   }
 };
+const deleteListItemList = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const { category_id } = req.body;
+
+    if (!category_id) {
+      return res.status(400).json({ message: "Category ID must be provided" });
+    }
+
+    const list = await List.findById(_id);
+    if (!list) {
+      return res.status(404).json({ message: "List not found" });
+    }
+
+    list.categories.pull(category_id);
+
+    await list.save();
+
+    return res
+      .status(200)
+      .json({ message: "List updated successfully", data: list });
+  } catch (error) {
+    console.error("Error updating list:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to update list", error: error.message });
+  }
+};
+// const updateList = async (req, res) => {
+//   try {
+//     const { _id } = req.params;
+//     const { category_id } = req.body;
+
+//     if (!category_id) {
+//       return res.status(400).json({ message: "Category ID must be provided" });
+//     }
+
+//     const list = await List.findById(_id);
+//     if (!list) {
+//       return res.status(404).json({ message: "List not found" });
+//     }
+
+//     if (list.categories.includes(category_id)) {
+//       list.categories.pull(category_id);
+//     } else {
+//       list.categories.push(category_id);
+//     }
+
+//     await list.save();
+
+//     return res
+//       .status(200)
+//       .json({ message: "List updated successfully", data: list });
+//   } catch (error) {
+//     console.error("Error updating list:", error);
+//     return res
+//       .status(500)
+//       .json({ message: "Failed to update list", error: error.message });
+//   }
+// };
 
 const findUsersByCategory = async(req, res) =>{
     const { categoryId } = req.params;
@@ -52,4 +108,4 @@ const findUsersByCategory = async(req, res) =>{
   }
 }
 
-module.exports = { updateList, findUsersByCategory };
+module.exports = { addListItemList, deleteListItemList, findUsersByCategory };
