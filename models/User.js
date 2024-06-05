@@ -38,6 +38,12 @@ const UserSchema = new Schema({
       ref: "User",
     },
   ],
+  categories: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
+  ],
 });
 
 UserSchema.plugin(passportLocalMongoose);

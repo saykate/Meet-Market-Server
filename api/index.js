@@ -16,7 +16,7 @@ const mongoose = require("mongoose");
 const authRouter = require("../routes/auth.routes");
 const userRouter = require("../routes/users.routes");
 const messageRouter = require("../routes/messages.routes");
-const listRouter = require("../routes/lists.routes");
+// const listRouter = require("../routes/lists.routes");
 const departmentRouter = require("../routes/departments.routes");
 const whitelist = [clientURL, "http://localhost:5173"];
 const corsOptions = { origin: whitelist, credentials: true };
@@ -73,7 +73,7 @@ app.get("/", (req, res) => {
 app.use("/auth", authRouter);
 app.use("/users", checkIsAuthenticated, userRouter);
 app.use("/messages", checkIsAuthenticated, messageRouter);
-app.use("/lists", checkIsAuthenticated, listRouter);
+// app.use("/lists", checkIsAuthenticated, listRouter);
 app.use("/departments", departmentRouter);
 
 // catch 404 and forward to error handler
