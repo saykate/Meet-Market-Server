@@ -1,4 +1,3 @@
-const List = require("../models/List");
 const User = require("../models/User");
 const Message = require("../models/Message");
 
@@ -51,32 +50,28 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-// exports.getUserLists = async (req, res) => {
-//   try {
-//     const { _id } = req.params;
-//     if (!_id) {
-//       return res.status(400).json({ message: "User Id required" });
-//     }
+exports.getUserCategories = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    if (!_id) {
+      return res.status(400).json({ message: "User Id required" });
+    }
 
-//     const user = await User.findById(_id);
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
+    const user = await User.findById(_id).populate("categories");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-//     const userLists = await List.find({ creator: user._id }).populate(
-//       "categories"
-//     );
-
-//     return res
-//       .status(200)
-//       .json({ message: "Success fetching Lists", data: userLists });
-//   } catch (error) {
-//     console.error("Error updating user:", error);
-//     return res
-//       .status(500)
-//       .json({ message: "Failed to fetch Lists", error: error.message });
-//   }
-// };
+    return res
+      .status(200)
+      .json({ message: "Success fetching Categories", data: user.categories });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to fetch Categories", error: error.message });
+  }
+};
 
 exports.addCategoryToUser = async (req, res) => {
     try {
