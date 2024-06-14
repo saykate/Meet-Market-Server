@@ -43,6 +43,7 @@ const handleRegister = async (req, res, next) => {
         const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, {
           expiresIn: 3600,
         });
+      res.status(200).json({ data: { JWT: `Bearer ${token}` } });
       }
     );
   } catch (error) {
