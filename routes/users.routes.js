@@ -10,5 +10,6 @@ router.post("/:_id/categories", users.addCategoryToUser);
 router.post("/:_id/categories/remove", users.removeCategoryFromUser);
 router.get("/categories/:categoryId", users.findUsersByCategory);
 router.get("/:_id/messages", users.getUserMessages);
+router.post("/follow", users.followUser)
 
 module.exports = router;

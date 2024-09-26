@@ -165,3 +165,45 @@ exports.getUserMessages = async (req, res) => {
       .json({ message: "Failed to fetch Messages", error: error.message });
   }
 };
+
+exports.followUser = async (req, res) => {
+  try {
+    const { userId, targetUserId } = req.body;
+
+    if (!targetUserId) {
+      return res.status(404).json({ message: "Target user ID must be provided" });
+    }
+
+    if (!userId) {
+      return res.status(404).json({ message: "Current user must be authenticated" });
+    }
+
+    const targetUser = await User.findById(targetUserId)
+    if (!targetUser) {
+      return res.status(404).json({ message: "Target user not found"})
+    }
+
+    const currentUser = await User.findById(userId)
+    if (!currentUser) {
+      return res.status(404).json({ message: "Target user not found"})
+    }
+
+    console.log("current user", currentUser)
+
+
+    await User.findByIdAndUpdate(userId, {
+      $addToSet: { following: targetUserId }
+    })
+    await User.findByIdAndUpdate(targetUserId, {
+      $addToSet: { followers: userId }
+    })
+    return res
+    .status(200)
+    .json({ message: "Successfully followed the user" });
+  } catch (error) {
+    console.error("Error following user", error);
+    return res
+      .status(500)
+      .json({ message: "Error following user" });
+  }
+}
