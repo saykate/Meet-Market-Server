@@ -207,3 +207,51 @@ exports.followUser = async (req, res) => {
       .json({ message: "Error following user" });
   }
 }
+
+exports.getUserFollowers = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    if (!_id) {
+      return res.status(400).json({ message: "User Id required" });
+    }
+
+    const user = await User.findById(_id).populate("followers");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    console.log("followers", res)
+
+    return res
+      .status(200)
+      .json({ message: "Success fetching followers", data: user.followers });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to fetch followers", error: error.message });
+  }
+};
+
+exports.getUserFollowing = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    if (!_id) {
+      return res.status(400).json({ message: "User Id required" });
+    }
+
+    const user = await User.findById(_id).populate("following");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Success fetching following", data: user.following });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to fetch following", error: error.message });
+  }
+};
