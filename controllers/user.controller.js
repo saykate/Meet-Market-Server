@@ -74,34 +74,34 @@ exports.getUserCategories = async (req, res) => {
 };
 
 exports.addCategoryToUser = async (req, res) => {
-    try {
-      const { _id } = req.params;
-      const { category_id } = req.body;
-  
-      if (!category_id) {
-        return res.status(400).json({ message: "Category ID must be provided" });
-      }
-  
-      const user = await User.findById(_id);
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-  
-      user.categories.push(category_id);
-      await user.save();
-  
-      return res
-        .status(200)
-        .json({ message: "Category added successfully", data: user });
-    } catch (error) {
-      console.error("Error adding category:", error);
-      return res
-        .status(500)
-        .json({ message: "Failed to add category", error: error.message });
-    }
-  };
+  try {
+    const { _id } = req.params;
+    const { category_id } = req.body;
 
- exports.removeCategoryFromUser = async (req, res) => {
+    if (!category_id) {
+      return res.status(400).json({ message: "Category ID must be provided" });
+    }
+
+    const user = await User.findById(_id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.categories.push(category_id);
+    await user.save();
+
+    return res
+      .status(200)
+      .json({ message: "Category added successfully", data: user });
+  } catch (error) {
+    console.error("Error adding category:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to add category", error: error.message });
+  }
+};
+
+exports.removeCategoryFromUser = async (req, res) => {
   try {
     const { _id } = req.params;
     const { category_id } = req.body;
@@ -118,13 +118,17 @@ exports.addCategoryToUser = async (req, res) => {
     user.categories.pull(category_id);
     await user.save();
 
-    return res.status(200).json({ message: "Category removed successfully", data: user });
+    return res
+      .status(200)
+      .json({ message: "Category removed successfully", data: user });
   } catch (error) {
     console.error("Error removing category:", error);
-    return res.status(500).json({ message: "Failed to remove category", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Failed to remove category", error: error.message });
   }
 };
-  
+
 exports.findUsersByCategory = async (req, res) => {
   const { categoryId } = req.params;
   if (!categoryId) {
@@ -135,7 +139,9 @@ exports.findUsersByCategory = async (req, res) => {
     return res.status(200).json({ data: users });
   } catch (error) {
     console.error("Error finding users:", error);
-    return res.status(500).json({ message: "Failed to find users", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Failed to find users", error: error.message });
   }
 };
 
@@ -166,47 +172,60 @@ exports.getUserMessages = async (req, res) => {
   }
 };
 
-exports.followUser = async (req, res) => {
+exports.toggleFollowUser = async (req, res) => {
   try {
     const { userId, targetUserId } = req.body;
 
     if (!targetUserId) {
-      return res.status(404).json({ message: "Target user ID must be provided" });
+      return res
+        .status(404)
+        .json({ message: "Target user ID must be provided" });
     }
 
     if (!userId) {
-      return res.status(404).json({ message: "Current user must be authenticated" });
+      return res
+        .status(404)
+        .json({ message: "Current user must be authenticated" });
     }
 
-    const targetUser = await User.findById(targetUserId)
+    const targetUser = await User.findById(targetUserId);
     if (!targetUser) {
-      return res.status(404).json({ message: "Target user not found"})
+      return res.status(404).json({ message: "Target user not found" });
     }
 
-    const currentUser = await User.findById(userId)
+    const currentUser = await User.findById(userId);
     if (!currentUser) {
-      return res.status(404).json({ message: "Target user not found"})
+      return res.status(404).json({ message: "Target user not found" });
     }
 
-    console.log("current user", currentUser)
+    const isFollowing = currentUser.following.includes(targetUserId);
 
-
-    await User.findByIdAndUpdate(userId, {
-      $addToSet: { following: targetUserId }
-    })
-    await User.findByIdAndUpdate(targetUserId, {
-      $addToSet: { followers: userId }
-    })
-    return res
-    .status(200)
-    .json({ message: "Successfully followed the user" });
+    if (isFollowing) {
+      await User.findByIdAndUpdate(userId, {
+        $pull: { following: targetUserId },
+      });
+      await User.findByIdAndUpdate(targetUserId, {
+        $pull: { followers: userId },
+      });
+      return res
+        .status(200)
+        .json({ message: `Successfully unfollowed ${targetUser.username}` });
+    } else {
+      await User.findByIdAndUpdate(userId, {
+        $addToSet: { following: targetUserId },
+      });
+      await User.findByIdAndUpdate(targetUserId, {
+        $addToSet: { followers: userId },
+      });
+      return res
+        .status(200)
+        .json({ message: `Successfully followed ${targetUser.username}` });
+    }
   } catch (error) {
     console.error("Error following user", error);
-    return res
-      .status(500)
-      .json({ message: "Error following user" });
+    return res.status(500).json({ message: "Error following user" });
   }
-}
+};
 
 exports.getUserFollowers = async (req, res) => {
   try {
@@ -220,7 +239,7 @@ exports.getUserFollowers = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("followers", res)
+    console.log("followers", res);
 
     return res
       .status(200)

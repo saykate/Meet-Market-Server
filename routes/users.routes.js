@@ -10,7 +10,7 @@ router.post("/:_id/categories", users.addCategoryToUser);
 router.post("/:_id/categories/remove", users.removeCategoryFromUser);
 router.get("/categories/:categoryId", users.findUsersByCategory);
 router.get("/:_id/messages", users.getUserMessages);
-router.post("/follow", users.followUser)
+router.post("/follow", users.toggleFollowUser)
 router.get("/:_id/followers", users.getUserFollowers)
 router.get("/:_id/following", users.getUserFollowing)
 
